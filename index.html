@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="Shortcut icon" href="img/wezel.svg">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link type="text/css" href="css/belka.css" rel="Stylesheet" />
+    
+    <script src="js/przekroj1.js"></script>
+    <script src="js/dane.js"></script>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.alerts.js" type="text/javascript"></script>
+    <script src="js/MESb.js?V=1.4"></script>
+</head>
+<body>
+    <h1>belka<sup>ver. 20.01.2026 r.</sup>
+        <span class="a-right glyphicon icon-full" data-toggle="tooltip" data-placement="bottom" title="Kliknij, aby wyświetlić stronę na całym ekranie" onclick="openFullscreen()"></span>
+        <a href="../index.html"><span class="a-right glyphicon icon-home" data-toggle="tooltip" data-placement="bottom" title="@ dr inż. Waldemar Szaniec, Politechnika Świętokrzyska. Wszelkie prawa zastrzeżone. Zabronione jest kopiowanie i modyfikowanie kodu źródłowego. Strona dostępna wyłącznie do celów edukacyjnych.Strona działa poprawnie tylko na przeglądarkach komputerowych Chrome i Microsoft Edge.Kliknij, aby przejść do strony głównej"></span></a>
+        <span class="a-left glyphicon icon-new" data-toggle="tooltip" data-placement="bottom" title="Kliknij, aby utworzyć nowe dane" onclick="Nowy()"></span>
+        <label id='lplik' for="plik" class="a-left glyphicon icon-open" data-toggle="tooltip" data-placement="bottom" title="Kliknij, aby wczytać dane z dysku"></label>
+        <input type="file" id="plik" accept=".mesB">
+        <span class="a-left glyphicon icon-save" data-toggle="tooltip" data-placement="bottom" title="Kliknij, aby zapisać dane na dysku lokalnym" onclick="zapisz()"></span>
+        <span class="a-left glyphicon icon-undo" data-toggle="tooltip" data-placement="bottom" title="Cofnij ostatnią zmianę" onclick="Undo()"></span>
+        <span class="a-left glyphicon icon-refresh" data-toggle="tooltip" data-placement="bottom" title="Reset aplikacji" onclick="Reload()"></span>
+        <span id="like" class="a-left glyphicon glyphiconB icon-like" data-toggle="tooltip" data-placement="bottom" title="Polub stronę, dzięki temu dostajesz program za darmo! Docenisz w ten sposób również miesięce pracy i lata doświadczeń autora 😊"><sup>0</sup></span>
+        <span id="uruch" class="a-left glyphicon glyphiconB icon-uruch" data-toggle="tooltip" data-placement="bottom" title="Licaba urochomień: "><sup>0</sup></span>
+   </h1>
+    <fieldset id='menu'>
+        <input type="radio" name='menuRama' id="menuInfo" opc="opcInfo" checked="checked" /><label class='menuLabel' for="menuInfo" data-toggle="tooltip" data-placement="right" title="Szkic konstrukcji. Użyj myszki, aby zmienić położenie/skalę rysunku"><img class='img18' src="img/info.svg" align='middle'>Szkic</label><br/>
+        <input type="radio" name='menuRama' id="menuWezly" opc="opc0" /><label class='menuLabel' for="menuWezly" data-toggle="tooltip" data-placement="right" title="Edycja węzłów"><img class='img18' src="img/wezel.svg" align='middle'>Węzły</label><br/>
+        <input type="radio" name='menuRama' id="menuElementy" opc="opc1"/><label class='menuLabel' for="menuElementy" data-toggle="tooltip" data-placement="right" title="Dodaj/usuń elememty"><img class='img18' src="img/element.svg" align='middle'>Elementy</label><br/>
+        <input type="radio" name='menuRama' id="menuLacznik" opc="opcLacznik"/><label class='menuLabel' for="menuLacznik" data-toggle="tooltip" data-placement="right" title="Dodaj/usuń połączenie"><img class='img18' src="img/lacznik.svg" align='middle'>Połaczenia</label><br/>
+        <input type="radio" name='menuRama' id="menuPodpory" opc="opcPodpory"/><label class='menuLabel' for="menuPodpory" data-toggle="tooltip" data-placement="right" title="Dodaj/usuń podpory"><img class='img18' src="img/podpora.svg" align='middle'>Podpory</label><br/>
+        <input type="radio" name='menuRama' id="menuObc" opc="opcObc"/><label class='menuLabel' for="menuObc" data-toggle="tooltip" data-placement="right" title="Obciążenie..."><img class='img18' src="img/obc.svg" align='middle'>Obciążenie</label><br/>
+        <input type="radio" name='menuRama' id="menuMaterial" opc="opcMaterial"/><label class='menuLabel' for="menuMaterial" data-toggle="tooltip" data-placement="right" title="Materiał"><img class='img18' src="img/material.svg" align='middle'>Materiał</label><br/>
+        <input type="radio" name='menuRama' id="menuPrzekroj" opc="opcPrzekroj"/><label class='menuLabel' for="menuPrzekroj" data-toggle="tooltip" data-placement="right" title="Przekroj"><img class='img18' src="img/przekroj.svg" align='middle'>Przekrój</label><br/>
+        <input type="radio" name='menuRama' id="menuDist" opc="opcDist" /><label class='menuLabel' for="menuDist" data-toggle="tooltip" data-placement="right" title="Linie wymiarowe"><img class='img18' src="img/distance.svg" align='middle'>Wymiary</label><br/>
+        <input type="radio" name='menuRama' id="menuWyniki" opc="opcWyn"'/><label class='menuLabel' for="menuWyniki" data-toggle="tooltip" data-placement="right" title="Wyniki"><img class='img18' src="img/calc.svg" align='middle'>Wyniki</label><br/>
+        <input type="radio" name='menuRama' id="menuTools" opc="opcTools"'/><label class='menuLabel' for="menuTools" data-toggle="tooltip" data-placement="right" title="Ustawienia..."><img class='img18' src="img/tools.svg" align='middle'>Opcje</label><br/>        
+    </fieldset><br/>
+    <fieldset id='planszainfo'>
+        <label class='infoLabel'>Informacje</label>
+        <ul id='Info'></ul>
+    </fieldset>
+    <fieldset class='opc' hidden id='opcDist'>
+        <input type="radio" name='opcDistp' id="opcDistXY"opc='addDistXY'/><label class='opcLabel' for="opcDistXY" data-toggle="tooltip" data-placement="bottom" title="Wstaw wymiar pionowy lub poziomy"><img class='img24' src="img/distanceH.svg" align='middle'></label>
+        <input type="radio" name='opcDistp' id="opcDistMinus"opc='minus'/><label class='opcLabel' for="opcDistMinus" data-toggle="tooltip" data-placement="bottom" title="Usuń wymiar"><img class='img24' src="img/minus.svg" align='middle'></label>
+    </fieldset>
+    <fieldset class='opc' hidden id='opc0'>
+        <input type="radio" name='opc0p' id="opc0Edit"opc='edit'/><label class='opcLabel' for="opc0Edit" data-toggle="tooltip" data-placement="bottom" title="Węzeł sztywny. Dodaj lub zmień położenie"><img class='img24' src="img/wezel1.svg" align='middle'></label>
+        <input type="radio" name='opc0p' id="opc0Minus"opc='minus'/><label class='opcLabel' for="opc0Minus" data-toggle="tooltip" data-placement="bottom" title="Usuń węzeł"><img class='img24' src="img/minus.svg" align='middle'></label>
+    </fieldset>
+    <fieldset class='opc' hidden id='opc1'>
+            <input type="radio" name='opc1p' id="opc1Plus"opc='add'/><label class='opcLabel' for="opc1Plus" data-toggle="tooltip" data-placement="bottom" title="Dodaj element. Wskaż węzeł lub punkt początkowy/końcowy. Wciśnij klawisz ESC aby zakończyć edycję"><img class='img24' src="img/plus.svg" align='middle'></label>
+            <input type="radio" name='opc1p' id="opc1Minus"opc='minus'/><label class='opcLabel' for="opc1Minus" data-toggle="tooltip" data-placement="bottom" title="Usuń element"><img class='img24' src="img/minus.svg" align='middle'></label>
+    </fieldset>
+    <fieldset class='opc' hidden id='opcPodpory'>
+            <input type="radio" opisWiez="pN" name='opc2p' id="opc2PN"opc='pn'/><label class='opcLabel' for="opc2PN" data-toggle="tooltip" data-placement="bottom" title="Podpora przegubowa. Wskaż węzeł lub punkt belki"><img id="pn" class='img24 imgrotate0' rotate="0" src="img/PN.svg" align='middle'><div class='zmien4'></div></label>
+            <input type="radio" opisWiez="pP" name='opc2p' id="opc2PP"opc='pp'/><label class='opcLabel' for="opc2PP" data-toggle="tooltip" data-placement="bottom" title="Podpora przesuwna. Wskaż węzeł lub punkt belki"><img id="pp" class='img24 imgrotate0' rotate="0" src="img/PP.svg" align='middle'><div class='zmien4'></div></label>
+            <input type="radio" opisWiez="pPX" name='opc2p' id="opc2PPx"opc='ppx'/><label class='opcLabel' for="opc2PPx" data-toggle="tooltip" data-placement="bottom" title="Podpora przesuwna pozioma. Wskaż węzeł lub punkt belki. Kliknij dwukrotnie, aby zmienić kąt nachylenia podpory"><img id="ppx" class='img24 imgrotate' rotate="0" src="img/PPx.svg" align='middle'><div class='zmien4'></div></label>
+            <input type="radio" opisWiez="pU" name='opc2p' id="opc2PU"opc='pu'/><label class='opcLabel' for="opc2PU" data-toggle="tooltip" data-placement="bottom" title="Utwierdzenie. Wskaż węzeł lub punkt belki. Kliknij dwukrotnie, aby zmienić kąt nachylenia podpory"><img id="pu" class='img24 imgrotate' rotate="0" src="img/PU.svg" align='middle'><div class='zmien4'></div></label>
+            <input type="radio" opisWiez="pNU" name='opc2p' id="opc2PNU"opc='pnu'/><label class='opcLabel' for="opc2PNU" data-toggle="tooltip" data-placement="bottom" title="Niepełne utwierdzenie. Wskaż węzeł lub punkt belki. Kliknij dwukrotnie, aby zmienić kąt nachylenia podpory"><img id="pnu" class='img24 imgrotate' rotate="0" src="img/PNU.svg" align='middle'><div class='zmien4'></div></label>
+            <input type="radio" opisWiez="pL" name='opc2p' id="opc2PL"opc='pl'/><label class='opcLabel' for="opc2PL" data-toggle="tooltip" data-placement="bottom" title="Łyżwa. Wskaż węzeł lub punkt belki. Kliknij dwukrotnie, aby zmienić kąt nachylenia podpory"><img id="pl" class='img24 imgrotate' rotate="0" src="img/PL.svg" align='middle'><div class='zmien4'></div></label>
+            <input type="radio" opisWiez="pW" name='opc2p' id="opc2PW"opc='pw'/><label class='opcLabel' for="opc2PW" data-toggle="tooltip" data-placement="bottom" title="Więź pionowa. Wskaż węzeł lub punkt belki"><img id="pw" class='img24 imgrotate0' rotate="0" src="img/PW.svg" align='middle'><div class='zmien4'></div></label>
+            <input type="radio" opisWiez="pM" name='opc2p' id="opc2PM"opc='pM'/><label class='opcLabel' for="opc2PM" data-toggle="tooltip" data-placement="bottom" title="Blokada obrotu. Wskaż węzeł lub punkt belki"><img id="pM" class='img24 imgrotate0' rotate="0" src="img/PM.svg" align='middle'><div class='zmien4'></div></label>
+            <input type="radio" opisWiez="pKW" name='opc2p' id="opc2KW"opc='kw' /><label class='opcLabel' for="opc2KW" data-toggle="tooltip" data-placement="bottom" title="Podpora sprężysta. Wpisz sztywność podpory, a następnie wskaż węzeł podporowy"><img id="kw" class='img24 imgrotate0' src="img/kw.svg" rotate="0" align='middle'><div id="pKW" class='zmien4'><input class="tekst" type="text" value="1,0" id="mKW">[kN/m]</div></label>
+            <input type="radio" opisWiez="pKWL" name='opc2p' id="opc2KWL"opc='kwL' /><label class='opcLabel' for="opc2KWL" data-toggle="tooltip" data-placement="bottom" title="Podłoże Winklera. Wpisz sztywność podłoża, a następnie wskaż element"><img id="kwL" class='img24' src="img/kwL.svg" rotate="0" align='middle'><div id="pKWL" class='zmien4'><input class="tekst" type="text" value="1,0" id="mKWL">[kN/m<sup>2</sup>]</div></label>
+            <input type="radio" opisWiez="pMinus" name='opc2p' id="opc2Minus"opc='minus'/><label class='opcLabel' for="opc2Minus" data-toggle="tooltip" data-placement="bottom" title="Usuń podporę"><img class='img24' src="img/minus.svg" align='middle'></label>
+    </fieldset>
+    <fieldset class='opc' hidden id='opcObc'>
+            <input type="radio" opisObc="opisP" name='opc3p' id="opc3Plus"opc='add' /><label class='opcLabel' for="opc3Plus"><img id="P1" class='img24' src="img/st1.svg" rotate="0" align='middle' data-toggle="tooltip" data-placement="bottom" title="Siła skupiona.Wpisz wartość obciążenia, a następnie wskaż węzeł lub punkt belki"><div id="opisP" class='zmien3'><input class="tekst" type="text" value="4,000" id="mObc">[kN]</div></label>
+            <input type="radio" opisObc="opisM" name='opc3p' id="opc3PlusM"opc='addM' /><label class='opcLabel' for="opc3PlusM"><img id="M1" class='img24' src="img/M1.svg" rotate="0" align='middle' data-toggle="tooltip" data-placement="bottom" title="Moment skupiony.Wpisz wartość obciążenia, a następnie wskaż węzeł lub punkt belki"><div id="opisM" class='zmien3'><input class="tekst" type="text" value="12,000" id="mObcM">[kNm]</div></label>
+            <input type="radio" opisObc="opisRozl" name='opc3p' id="opc3PlusRozl"opc='addRozl' /><label class='opcLabel' for="opc3PlusRozl" data-toggle="tooltip" data-placement="bottom" title="Obciążenie bezpośrednie. Wpisz wartość obciążenia, a następnie wskaż element"><img class='img24' src="img/rozl.svg" align='middle' ><div id="opisRozl" class='zmien3'><input class="tekst" type="text" value="2,000" id="mObcRozl">[kN/m]</div></label>
+            <!--<input type="radio" name='opc3p' id="opc3PlusZmienne"opc='addZmienne' /><label class='opcLabel' for="opc3PlusZmienne" data-toggle="tooltip" data-placement="bottom" title="Obciążenie zmienne. Wpisz wartość obciążenia, a następnie wskaż element"><img class='img24' src="img/zmienne.svg" align='middle' ><input class="tekst" type="text" value="4,000" id="mObcZmienne">[kN/m]</label>-->
+            <input type="radio" opisObc="opisOsiad" name='opc3p' id="opc3PlusOsiad"opc='addOsiad' /><label class='opcLabel' for="opc3PlusOsiad" ><img class='img24 imgOchange' src="img/osiad.svg" align='middle' data-toggle="tooltip" data-placement="bottom" title="Osiadanie pionowe. Wpisz wartość przemieszczenia, a następnie wskaż podporę .Kliknij dwukrotnie, aby zmienić kierunek osiadania"><img id="osiadFI" class='img24 imgOchange' src="img/osiadFI.svg" align='middle'  data-toggle="tooltip" data-placement="bottom" title="Osiadanie kątowe.Wpisz wartość przemieszczenia, a następnie wskaż podporę.Kliknij dwukrotnie, aby zmienić kierunek osiadania"><div id="opisOsiad" class='zmien3'><input class="tekst" type="text" value="1,000" id="mOsiad">[m]</div></label>
+            <input type="radio" opisObc="opisMasa" name='opc3p' id="opc3PlusMasa"opc='addMasa' /><label class='opcLabel' for="opc3PlusMasa"><img id="masa" class='img24' src="img/masa.svg" rotate="0" align='middle' data-toggle="tooltip" data-placement="bottom" title="Masa skupiona.Wpisz wartość masy, a następnie wskaż węzeł lub punkt belki"><div id="opisMasa" class='zmien3'><input class="tekst" type="text" value="1,000" id="mMasa">[kg]</div></label>
+            <input type="radio" opisObc="opisTemp" name='opc3p' id="opc3PlusT"opc='addDT' /><label class='opcLabel' for="opc3PlusT"><img id="masa" class='img24' src="img/T1.svg" rotate="0" align='middle' data-toggle="tooltip" data-placement="bottom" title="Temperatura włókien dolnych i górnych. Wpisz wartość obciążenia, a następnie wskaż element">T<sub>D</sub><div id="opisTemp" class='zmien3'><input class="tekst" type="text" value="10" id="mTD">T<sub>G</sub><input class="tekst" type="text" value="20" id="mTG">[<sup>o</sup>C]</div></label>
+            <input type="radio" opisObc="opisCW" name='opc3p' id="opc3CW"opc='addCW' /><label class='opcLabel' for="opc3CW"><img class='img24' src="img/obcCW.svg" rotate="0" align='middle' data-toggle="tooltip" data-placement="bottom" title="Uwzględmij ciężar własny konstrukcji - aktywuj pole wyboru"><div id="opisCW" class='zmien3'><input type="checkbox" id="mCW"></div></label>
+            <input type="radio" opisObc="opisMinus" name='opc3p' id="opc3Minus"opc='minus'/><label class='opcLabel' for="opc3Minus" data-toggle="tooltip" data-placement="bottom" title="Usuń obciążenie. Wskaż węzeł lub element"><img class='img24' src="img/minus.svg" align='middle'></label>
+    </fieldset>
+    <fieldset class='opc' hidden id='opcWyn'>
+            <input type="radio" name='opc4p' id="opc4Q"opc='Q'/><label class='opcLabel' for="opc4Q" data-toggle="tooltip" data-placement="bottom" title="Przemieszczenia. Użyj Shift+Scroll aby zmienić skalę przemieszczeń"><img data-toggle="tooltip" data-placement="bottom" title="Q" class='img24a' src="img/wQ.svg" align='middle'></label>
+            <input type="radio" name='opc4p' id="opc4M"opc='M'/><label class='opcLabel' for="opc4M" data-toggle="tooltip" data-placement="bottom" title="Wykres momentów zginających. Użyj Shift+Scroll aby zmienić skalę rzędnych"><img data-toggle="tooltip" data-placement="bottom" title="M" class='img24a' src="img/wM.svg" align='middle'></label>
+            <input type="radio" name='opc4p' id="opc4T"opc='T'/><label class='opcLabel' for="opc4T" data-toggle="tooltip" data-placement="bottom" title="Wykres sił tnących. Użyj Shift+Scroll aby zmienić skalę rzędnych"><img data-toggle="tooltip" data-placement="bottom" title="T" class='img24a' src="img/wT.svg" align='middle'></label>
+            <input type="radio" name='opc4p' id="opc4R"opc='R'/><label class='opcLabel' for="opc4R" data-toggle="tooltip" data-placement="bottom" title="Reakcje"><img data-toggle="tooltip" data-placement="bottom" title="R" class='img24' src="img/wR.svg" align='middle'></label>
+            <input type="radio" name='opc4p' id="opc4LWR"opc='LWR'/><label class='opcLabel' for="opc4LWR" data-toggle="tooltip" data-placement="bottom" title="Linie wpływu rekcji. Wskaż węzeł podporowy"><img data-toggle="tooltip" data-placement="bottom" title="LW R" class='img24a' src="img/wLWR.svg" align='middle'></label>
+            <input type="radio" name='opc4p' id="opc4LWM"opc='LWM'/><label class='opcLabel' for="opc4LWM" data-toggle="tooltip" data-placement="bottom" title="Linie wpływu momenów zginających. Wskaż element i leżacy na nim punkt"><img data-toggle="tooltip" data-placement="bottom" title="LW M" class='img24a' src="img/wLWM.svg" align='middle'></label>
+            <input type="radio" name='opc4p' id="opc4LWT"opc='LWT'/><label class='opcLabel' for="opc4LWT" data-toggle="tooltip" data-placement="bottom" title="Linie wpływu sił poprzecznych. Wskaż element i leżacy na nim punkt"><img data-toggle="tooltip" data-placement="bottom" title="LW T" class='img24a' src="img/wLWT.svg" align='middle'></label>
+            <!--<input type="radio" name='opc4p' id="opc4ObwM"opc='ObwM'/><label class='opcLabel' for="opc4ObwM" data-toggle="tooltip" data-placement="bottom" title="Obwiednia momentów zginających"><img id="obwM" data-toggle="tooltip" data-placement="bottom" title="Obw M" class='img24a' src="img/OBWM.svg" align='middle'></label>
+            <input type="radio" name='opc4p' id="opc4ObwT"opc='ObwT'/><label class='opcLabel' for="opc4ObwT" data-toggle="tooltip" data-placement="bottom" title="Obwiednia sił tnących."><img id="obwT" data-toggle="tooltip" data-placement="bottom" title="Obw T" class='img24a' src="img/OBWT.svg" align='middle'></label>-->
+            <input type="radio" name='opc4p' id="opc4dyn"opc='Dyn'/><label class='opcLabel' for="opc4dyn" data-toggle="tooltip" data-placement="bottom" title="Drgania własne"><img id="dyn" class='img24' src="img/dyn.svg" align='middle' data-toggle="tooltip" data-placement="bottom"></label><label id='opcDyn' class='opcDyn opcLabel'><select id='nrDyn' data-toggle="tooltip" data-placement="bottom" title="Wybierz formę drgań"></select><button id="Anim">Animacja</button><label for="Anim"><img id="AnimStart" data-toggle="tooltip" data-placement="bottom" title="Animacja drgań" class='img24' src="img/start.svg" align='middle'><img id="AnimStop" data-toggle="tooltip" data-placement="bottom" title="Zatrzymaj animację" class='img24' src="img/stop.svg" align='middle'></label>
+    </fieldset>
+    
+    <fieldset class='opc' hidden id='opcMaterial'><label><select id="opcMat" data-toggle="tooltip" data-placement="bottom" title="Wybierz materiał, a następnie wskaż element"></select></label></fieldset>
+    <fieldset class='opc' hidden id='opcPrzekroj'>
+        <input type="radio" opis="opisSpec" name='opc7p' id="opcSpec"opc='spec'/>
+            <label class='opcLabel' for="opcSpec">
+                <img class='img24' src="img/spec.svg" rotate="0" align='middle' data-toggle="tooltip" data-placement="bottom" title='Przekroje specjalne, np. J=1. Wybierz przekrój, a następnie wskaż element'>
+                <div id="opisSpec" class='zmien2'><select id="Spec" data-toggle="tooltip" data-placement="bottom" title="Wybierz przekrój, a następnie wskaż element"></select></div>
+            </label>
+        <input type="radio" opis="opisKsztalt" name='opc7p' id="opc7Ksztalt"opc='ksztalt'/>
+            <label class='opcLabel' for="opc7Ksztalt">
+                <img class='img24' src="img/ksztalt.svg" rotate="0" align='middle' data-toggle="tooltip" data-placement="bottom" title="Kształtowniki stalowe. Wybierz przekrój, a następnie wskaż element">
+                <div id="opisKsztalt" class='zmien2'><select id="opcTypProfil" data-toggle="tooltip" data-placement="bottom" title="Wybierz grupę (filtr)"></select><select id="opcProfil" data-toggle="tooltip" data-placement="bottom" title="Wybierz przekrój, a następnie wskaż element"></select></div>
+            </label>
+            <input type="radio" opis="opisProst" name='opc7p' id="opc7prost"opc='prost'/>
+                <label class='opcLabel' for="opc7prost">
+                    <img class='img24' src="img/prost.svg" rotate="0" align='middle' data-toggle="tooltip" data-placement="bottom" title="Przekrój prostokątny. Wprowadź wymiary, a następnie wskaż element">
+                    <div id="opisProst" class='zmien2'>b = <input class="tekstP imgView" type="text" value="20" id="prostB" srcBig="img/prostB.svg">h = <input class="tekstP imgView" type="text" value="40" id="prostH" srcBig="img/prostH.svg">[cm]</div>
+                </label>
+            <input type="radio" opis="opisKolo" name='opc7p' id="opc7kolo"opc='kolo'/>
+                <label class='opcLabel' for="opc7kolo">
+                    <img class='img24' src="img/kolo.svg" rotate="0" align='middle' data-toggle="tooltip" data-placement="bottom" title="Przekrój kołowy z otworem lub bez. Wprowadź wymiary, a następnie wskaż element">
+                    <div id="opisKolo" class='zmien2'>D = <input class="tekstP imgView" type="text" value="5" id="koloR" srcBig="img/koloR.svg">d = <input class="tekstP imgView" type="text" value="0" id="koloR1" srcBig="img/koloR1.svg">[cm]</div>
+                </label>
+            <input type="radio" opis="opisTeow" name='opc7p' id="opc7teow"opc='teow'/>
+                <label class='opcLabel' for="opc7teow">
+                    <img class='img24' src="img/teow.svg" rotate="0" align='middle' data-toggle="tooltip" data-placement="bottom" title="Przekrój teowy. Wprowadź wymiary, a następnie wskaż element">                   
+                    <div id="opisTeow" class='zmien2'>b = <input class="tekstP imgView" type="text" value="30" id="teowB" srcBig="img/teowB.svg">bf = <input class="tekstP imgView" type="text" value="80" id="teowBf" srcBig="img/teowBf.svg">h = <input class="tekstP imgView" type="text" value="60" id="teowH" srcBig="img/teowH.svg">hf = <input class="tekstP imgView" type="text" value="20" id="teowHf" srcBig="img/teowHf.svg">[cm]</div>
+                </label>
+            <input type="radio" opis="opis2Teow" name='opc7p' id="opc72teow"opc='2teow'/>
+                <label class='opcLabel' for="opc72teow">
+                    <img class='img24' src="img/2teow.svg" rotate="0" align='middle' data-toggle="tooltip" data-placement="bottom" title="Przekrój dwuteowy. Wprowadź wymiary, a następnie wskaż element">
+                    <div id="opis2Teow" class='zmien2'>b = <input class="tekstP imgView" type="text" value="20" id="dwuteowB" srcBig="img/2teowB.svg">bf = <input class="tekstP imgView" type="text" value="1" id="dwuteowBf" srcBig="img/2teowBf.svg">h = <input class="tekstP imgView" type="text" value="40" id="dwuteowH" srcBig="img/2teowH.svg">hf = <input class="tekstP imgView" type="text" value="2" id="dwuteowHf" srcBig="img/2teowHf.svg">[cm]</div>
+                </label>
+            <input type="radio" opis="opisDef" name='opc7p' id="opc7Def"opc='def'/>
+                <label class='opcLabel' for="opc7Def">
+                    <img class='img24' src="img/def.svg" rotate="0" align='middle' data-toggle="tooltip" data-placement="bottom" title="Przekrój dowolny. Wprowadź wymagane dane, a następnie wskaż element">
+                    <div id="opisDef" class='zmien2'>A [cm<sup>2</sup>]&nbsp;<input class="tekstP imgView" type="text" value="1e13" id="defA" srcBig="img/defA.svg">Iy [cm<sup>4</sup>]&nbsp;<input class="tekstP imgView" type="text" value="1e8" id="defJy" srcBig="img/defJ.svg">mo [kg/m]&nbsp;<input class="tekstP imgView" type="text" value="0" id="defMo" srcBig="img/defM.svg"></div>
+                </label>
+    </fieldset>
+    <fieldset class='opc' hidden id='opcTools'>
+        <input type="radio" name='opc5p' id='snap' opc='snap'/>
+            <label class='opcLabel' for="snap">
+                <img class='img24' src="img/snap.svg" align='middle' data-toggle="tooltip" data-placement="bottom" title="Skok siatki">
+                <select class="zmien1" id="opcSnap"><option value="0.01">1 cm</option><option value="0.05">5 cm</option><option value="0.1">0.1 m</option><option value="0.2">0.2 m</option><option value="0.5">0.5 m</option><option value="1">1 m</option></select>
+            </label>         
+        <input type="radio" name='opc5p' id='dymek' opc='dymek'/>
+            <label class='opcLabel' for="dymek">
+                <img class='img24' src="img/tooltip.svg" align='middle'data-toggle="tooltip" data-placement="bottom" title="Wyświetlaj podpowiedzi (tzw. dymki)">
+                <input class="zmien1" type="checkbox" id="opcDymek" checked>
+            </label>
+        <input type="radio" name='opc5p' id='num' opc='num'/>
+            <label class='opcLabel' for="num"><img class='img24' src="img/num.svg" align='middle'data-toggle="tooltip" data-placement="bottom" title="Wyświetlaj tabele wyników"><input class="zmien1" type="checkbox" id="opcNum" checked></label>
+        <input type="radio" name='opc5p' id='jedn' opc='jedn'/>
+            <label class='opcLabel' for="Jedn">
+                <img class='img24' src="img/distance.svg" align='middle' data-toggle="tooltip" data-placement="bottom" title="Przemieszczenia: jednostki">
+                <select class="zmien1" id="opcJedn"><option value="1000">mm/mrad</option><option value="1">m/rad</option></select>
+            </label>   
+        <input type="radio" name='opc5p' id='autoSave' opc='autoSave'/>
+            <label class='opcLabel' for="autoSave">
+                <img class='img24' src="img/save.svg" align='middle'data-toggle="tooltip" data-placement="bottom" title="Automatyczny zapis danych w zasobach lokalnych komputera">
+                <input class="zmien1" type="checkbox" id="opcAutoSave">
+            </label>
+    </fieldset>
+    <fieldset class='opc' hidden id='opcLacznik'>
+        <input type="radio" name='opc6p' id="opc1EditPrzegub"opc='editPrzegub'/><label class='opcLabel' for="opc1EditPrzegub" data-toggle="tooltip" data-placement="bottom" title="Dodaj lub usuń połączenie przegubowe. Wskaż węzeł lub punkt belki"><img class='img24' src="img/wezel2.svg" align='middle'></label>
+        <input type="radio" name='opc6p' id="opc1EditWolny"opc='editWolny'/><label class='opcLabel' for="opc1EditWolny" data-toggle="tooltip" data-placement="bottom" title="Dodaj lub usuń rozcięcie węzła. Wskaż węzeł lub punkt belki"><img class='img24' src="img/wezel3.svg" align='middle'></label>
+        <!--<input type="radio" name='opc6p' id="opc1EditLyzwa"opc='editLyzwa'/><label class='opcLabel' for="opc1EditLyzwa" data-toggle="tooltip" data-placement="bottom" title="Dodaj lub usuń łyżwę wewnętrzną. Wskaż węzeł lub jeden z końców elementu"><img class='img24' src="img/wezel4.svg" align='middle'></label>-->
+    </fieldset>
+    <img id="viewBig" src="img/tooltip.svg">
+    <div id="wynikiNum" hidden> 
+        <div id="wyniki-header"><p></p><span>Wyniki numeryczne</span><span class="close-btn" onclick="hideTable()">&#10006;</span></div>
+        <div class="table-scroll-wrapper"><table id="tableNum"></table></div>
+    </div>
+    <canvas id='graph'"></canvas>
+    <div id="blokPolub" class="drag1">
+        <p id="Polub" class="run-animation">Kliknij przycisk Polub, aby zamknąć animację i przejść do pełnej wersji aplikacji</p>
+    </div>
+    <div id="contextMenu"><ul><li id="copyTable">📋 Kopiuj tabelę</li></ul></div>
+    <script src="js/graphb.js?V=1.4"></script>
+</body>
+</html>
